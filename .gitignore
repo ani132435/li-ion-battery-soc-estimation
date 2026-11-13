@@ -3,11 +3,9 @@ slprj/
 **/slprj/
 *.slxc
 *.asv
-*.mexw64
-
-# MATLAB temporary and backup files
 *.m~
 *.autosave
+*.mexw64
 
 # Editor and operating system files
 .vscode/
@@ -21,12 +19,5 @@ __pycache__/
 .venv/
 venv/
 
-# Simulink generated directories
-**/slprj/
-
-# Simulink cache
-*.slxc
-
-# MATLAB autosave and backup
-*.asv
-*.m~
+# Original extracted project backup
+/BMS Project/
