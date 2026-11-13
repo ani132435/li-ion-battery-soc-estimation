@@ -75,5 +75,13 @@ Planned Work
 - Review and validate the EKF implementation.
 - Compare estimation methods using metrics such as RMSE and MAE.
 - Document execution instructions, assumptions and limitations.
+
+## Documentation
+
+- [Project Overview](docs/PROJECT_OVERVIEW.md)
+- [Battery Models](docs/BATTERY_MODELS.md)
+- [Simulation Guide](docs/SIMULATION_GUIDE.md)
+- [Known Limitations and Future Work](docs/KNOWN_LIMITATIONS.md)
+
 Note
 This is an academic engineering project for studying battery modelling and SoC estimation. The models and methods require independent validation before any real-world BMS application.
