@@ -1,89 +1,204 @@
-﻿# Li-Ion Battery Modelling and State-of-Charge Estimation
+# Lithium-Ion Battery Modelling and State-of-Charge Estimation
 
-A MATLAB/Simulink-based project exploring lithium-ion battery equivalent-circuit modelling and battery State-of-Charge (SoC) estimation.
+A MATLAB/Simulink-based study of lithium-ion battery modelling, simulation, and State-of-Charge (SoC) estimation techniques.
 
-## Project Overview
+## Overview
 
-Accurate SoC estimation is an important function of a Battery Management System (BMS). This project investigates battery modelling and estimation methods through simulation, MATLAB scripting and data analysis.
+This project explores different mathematical approaches to representing lithium-ion battery behaviour and investigates methods for estimating battery State of Charge.
 
-The repository contains multiple battery model structures, simulation scripts, data artifacts and preliminary estimation workflows.
+The work includes equivalent-circuit battery models, simulation workflows, Coulomb Counting, an Extended Kalman Filter (EKF)-based estimation workflow, and a preliminary neural-network workflow.
+
+The project was independently developed, with AI tools used as supporting aids during parts of the development process.
+
+**Project status:** Ongoing academic and experimental work. Model behaviour and estimation workflows are still being validated.
 
 ## Objectives
 
-- Study different lithium-ion battery equivalent-circuit models.
-- Examine battery current, terminal voltage and SoC behaviour.
-- Explore Coulomb Counting and Extended Kalman Filter (EKF) approaches.
-- Investigate data-driven SoC estimation using neural networks.
-- Evaluate estimation performance under different operating conditions.
+- Explore different lithium-ion battery model structures.
+- Implement and simulate battery models using MATLAB and Simulink.
+- Study the relationship between battery current, terminal voltage, and SoC.
+- Investigate Coulomb Counting and EKF-based SoC estimation.
+- Explore neural-network-based estimation using simulation data.
+- Identify modelling assumptions, implementation limitations, and areas for improvement.
 
 ## Battery Models
 
-The repository includes MATLAB/Simulink models for:
+The repository includes the following MATLAB/Simulink models:
 
-- Rint battery model
-- First-order RC equivalent-circuit model
-- Second-order RC equivalent-circuit model
-- Hysteresis battery model
-- Shepherd battery model
-- First-order model configured for EKF-based estimation
+| Model | Description |
+|---|---|
+| `Battery_Model_Rint.slx` | Rint equivalent-circuit model |
+| `Battery_Model_First_Order.slx` | First-order RC equivalent-circuit model |
+| `Battery_Model_Order_first.slx` | Additional first-order model implementation |
+| `Battery_Model_Second_Order.slx` | Second-order RC equivalent-circuit model |
+| `Battery_model_Hysterisis.slx` | Hysteresis-oriented battery model |
+| `Shepherd_Battery_Model.slx` | Shepherd battery model |
+| `Battery_Model_First_Order_EKF.slx` | First-order model with an EKF-oriented estimation workflow |
 
-## Estimation Methods
+These models provide different levels of representation of battery voltage characteristics and dynamic behaviour. Their parameterization and quantitative accuracy require further validation.
 
-### Coulomb Counting
+## SoC Estimation Approaches
 
-A current-integration approach for tracking changes in battery SoC.
+### 1. Coulomb Counting
 
-### Extended Kalman Filter
+Coulomb Counting estimates SoC by integrating battery current over time, based on an initial SoC and assumptions about charge capacity and efficiency.
 
-A model-based estimation workflow using a first-order battery model. Its implementation and performance are undergoing review.
+### 2. Extended Kalman Filter
 
-### Neural Network
+An EKF-oriented workflow is included alongside the first-order battery model.
 
-An initial feedforward neural network and its associated training artifacts are included.
+The associated analysis script is intended to examine estimated and reference SoC signals and calculate error metrics such as:
 
-**Important:** An audit of the archived neural-network dataset found that its target contains exactly three values: 0, 25 and 40. These match the temperature conditions in the original simulation script. The target signal and input-column ordering must therefore be verified before this network can be considered a valid SoC estimator. The original artifacts are retained for reference and are not presented as validated results.
+- Root Mean Square Error (RMSE)
+- Mean Absolute Error (MAE)
+
+The logged signals require time alignment before meaningful comparisons can be made because they are not all recorded at the same sample rate.
+
+### 3. Neural-Network Exploration
+
+The repository also contains a preliminary neural-network data preparation and training workflow.
+
+The saved dataset and trained-network artifact are retained as part of the development work. However, the target variable has not yet been conclusively verified as SoC. The neural-network results should therefore not be interpreted as validated SoC-estimation performance.
 
 ## Repository Structure
 
-``` text
+```text
 li-ion-battery-soc-estimation/
-|-- data/
-|-- models/
-|-- results/
-|   |-- figures/
-|-- scripts/
-|   |-- estimation/
-|   |-- neural-network/
-|   |-- simulation/
-|-- .gitignore
-|-- README.md
-
+│
+├── README.md
+├── .gitignore
+│
+├── docs/
+│   ├── PROJECT_OVERVIEW.md
+│   ├── BATTERY_MODELS.md
+│   ├── SIMULATION_GUIDE.md
+│   └── KNOWN_LIMITATIONS.md
+│
+├── models/
+│   ├── Battery_Model_Rint.slx
+│   ├── Battery_Model_First_Order.slx
+│   ├── Battery_Model_Order_first.slx
+│   ├── Battery_Model_Second_Order.slx
+│   ├── Battery_model_Hysterisis.slx
+│   ├── Shepherd_Battery_Model.slx
+│   └── Battery_Model_First_Order_EKF.slx
+│
+├── scripts/
+│   ├── simulation/
+│   │   ├── FirstAutomation.m
+│   │   └── untitled.m
+│   │
+│   ├── estimation/
+│   │   └── run_ekf_metrics.m
+│   │
+│   └── neural-network/
+│       └── prepare_train_nn.m
+│
+├── data/
+│   ├── matlab.mat
+│   ├── merged_dataset.mat
+│   ├── nn_scaling_settings.mat
+│   └── trained_soc_nn.mat
+│
+└── results/
+    └── figures/
 ```
+
 ## Tools and Technologies
+
 - MATLAB
 - Simulink
-- Battery equivalent-circuit modelling
-- MATLAB scripting and data analysis
-- Neural Network Toolbox
-Current Status
-The repository contains battery simulation models, MATLAB scripts, archived data and selected figures.
+- MATLAB scripting
+- Equivalent-circuit battery modelling
+- Coulomb Counting
+- Extended Kalman Filtering
+- Neural-network experimentation
 
-The simulation and estimation workflows are undergoing code review and reproducibility checks. Signal definitions, dataset generation, estimator implementations and evaluation procedures will be verified before validated results are reported.
-Planned Work
-- Verify the signal definitions and output ordering in the Simulink models.
-- Standardise simulation data generation and storage paths.
-- Correct and document the neural-network data-preparation workflow.
-- Separate training, validation and test data by simulation run.
-- Review and validate the EKF implementation.
-- Compare estimation methods using metrics such as RMSE and MAE.
-- Document execution instructions, assumptions and limitations.
+## Getting Started
+
+### Requirements
+
+- MATLAB
+- Simulink
+- Any additional MATLAB toolboxes required by the individual models
+
+Toolbox requirements may vary depending on the model and blocks used.
+
+### Opening a Model
+
+1. Clone or download this repository.
+2. Open MATLAB.
+3. Set the MATLAB Current Folder to the repository root.
+4. Navigate to the `models/` directory.
+5. Open the required `.slx` model.
+6. Review its input signals, parameters, initial conditions, and solver settings before running the simulation.
+
+For example, to open the first-order model:
+
+```matlab
+modelName = 'Battery_Model_First_Order';
+
+load_system(modelName);
+open_system(modelName);
+```
+
+### Running the Scripts
+
+The main simulation automation script is:
+
+```text
+scripts/simulation/FirstAutomation.m
+```
+
+The EKF analysis script is:
+
+```text
+scripts/estimation/run_ekf_metrics.m
+```
+
+The neural-network data preparation script is:
+
+```text
+scripts/neural-network/prepare_train_nn.m
+```
+
+**Note:** Some scripts use relative paths and specific working-directory assumptions. Review their data dependencies and output paths before execution. The repository is not yet configured as a fully automated, one-command simulation package.
+
+For further instructions, see the [Simulation Guide](docs/SIMULATION_GUIDE.md).
 
 ## Documentation
 
-- [Project Overview](docs/PROJECT_OVERVIEW.md)
-- [Battery Models](docs/BATTERY_MODELS.md)
-- [Simulation Guide](docs/SIMULATION_GUIDE.md)
-- [Known Limitations and Future Work](docs/KNOWN_LIMITATIONS.md)
+| Document | Description |
+|---|---|
+| [Project Overview](docs/PROJECT_OVERVIEW.md) | Project objectives, scope, and contents |
+| [Battery Models](docs/BATTERY_MODELS.md) | Overview of the battery model structures |
+| [Simulation Guide](docs/SIMULATION_GUIDE.md) | Instructions and notes for working with the models and scripts |
+| [Known Limitations](docs/KNOWN_LIMITATIONS.md) | Current issues and future development areas |
 
-Note
-This is an academic engineering project for studying battery modelling and SoC estimation. The models and methods require independent validation before any real-world BMS application.
+## Known Limitations
+
+Some areas that require further investigation include:
+
+- Validation of battery model parameters against experimental data.
+- SoC behaviour and operating limits under different simulation conditions.
+- Alignment of EKF and reference signals recorded at different sample rates.
+- Verification of the neural-network dataset's target variable.
+- Prevention of data leakage during neural-network training and evaluation.
+- Reproducibility of simulation workflows and script dependencies.
+
+These limitations are documented in greater detail in [KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md).
+
+## Future Work
+
+- Validate equivalent-circuit models against experimental battery measurements.
+- Improve SoC estimation and EKF implementation.
+- Establish consistent signal logging and comparison time bases.
+- Verify and rebuild the neural-network dataset and training workflow.
+- Improve simulation automation and reproducibility.
+- Document model parameters, assumptions, and evaluation results.
+
+## Repository Status
+
+This repository is a record of an ongoing academic engineering project. It contains developed models, simulation scripts, datasets, and analysis artifacts. The presence of a model or saved result does not imply that it has been experimentally validated.
+
+The work is intended for educational and experimental study, not safety-critical battery control or production battery-management applications.
