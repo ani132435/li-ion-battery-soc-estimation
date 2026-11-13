@@ -11,7 +11,7 @@ Required toolboxes and products depend on the specific model and blocks used. Op
 The main working directories are:
 
 - `models/` — Simulink models.
-- `scripts/simulation/` — simulation automation scripts.
+- `scripts/simulation/` — simulation and automation scripts.
 - `scripts/estimation/` — estimation analysis scripts.
 - `scripts/neural-network/` — neural-network data preparation.
 - `data/` — saved MATLAB data and network artifacts.
@@ -54,7 +54,7 @@ Before running it:
 3. Confirm that the required Simulink models and supporting files are available.
 4. Run the script from the working directory expected by the script.
 
-The script uses relative paths, so the working directory matters. Before running the script, check your current folder in MATLAB using `pwd`, and set it to the expected directory with `cd('path/to/working/directory')` if needed. Do not assume that running it from the repository root will work without checking its path handling.
+The script uses relative paths, so the working directory matters. Do not assume that running it from the repository root will work without checking its path handling.
 
 ## 5. EKF Analysis
 
@@ -93,9 +93,8 @@ The current workflow should be treated as preliminary. Before interpreting the n
 1. The meaning of every input variable.
 2. The meaning and units of the target variable.
 3. That the target actually represents SoC.
-4. That input variables are normalized or scaled appropriately, and that the same normalization is applied during inference.
-5. That training, validation, and test data are separated without data leakage.
-6. That the evaluation uses data not seen during training.
+4. That training, validation, and test data are separated without data leakage.
+5. That the evaluation uses data not seen during training.
 
 The saved network should not be considered a validated SoC estimator until these checks are complete.
 
@@ -119,9 +118,5 @@ For reproducible results:
 - Keep track of the working directory and data dependencies.
 - Save simulation settings alongside generated results.
 - Document any modifications to the models or scripts.
-Some workflows may require path corrections or additional validation before they can be executed directly from a fresh clone of the repository.
 
-For example, if a script fails to find a required file, check that your MATLAB current folder matches the script's expected working directory, or update any hardcoded paths in the script.
-
-If you encounter issues after cloning, see the [Troubleshooting](#troubleshooting) section below for common solutions.
 Some workflows may require path corrections or additional validation before they can be executed directly from a fresh clone of the repository.
