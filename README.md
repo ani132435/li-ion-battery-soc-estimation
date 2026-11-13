@@ -45,7 +45,7 @@ An initial feedforward neural network and its associated training artifacts are 
 
 ## Repository Structure
 
-
+``` text
 li-ion-battery-soc-estimation/
 |-- data/
 |-- models/
@@ -58,6 +58,7 @@ li-ion-battery-soc-estimation/
 |-- .gitignore
 |-- README.md
 
+```
 ## Tools and Technologies
 - MATLAB
 - Simulink
