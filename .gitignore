@@ -1,0 +1,32 @@
+﻿# MATLAB and Simulink generated files
+slprj/
+**/slprj/
+*.slxc
+*.asv
+*.mexw64
+
+# MATLAB temporary and backup files
+*.m~
+*.autosave
+
+# Editor and operating system files
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Simulink generated directories
+**/slprj/
+
+# Simulink cache
+*.slxc
+
+# MATLAB autosave and backup
+*.asv
+*.m~
